@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PCL-QW · 基于 PCL 的第三方社区修改版启动器</title>
+<meta name="description" content="PCL-QW 是基于 Plain Craft Launcher 2（PCL2）2.13.1.1 源代码制作的第三方社区修改版 Minecraft Java 版启动器：实例库、世界设置、版本升级、本地服务器、陶瓦联机、截图查看。仅支持 Windows。">
+<style>
+  :root{
+    --blue:#1f7ae0; --blue-dark:#1666bd; --blue-soft:#eaf3fd;
+    --ink:#1c2530; --ink-2:#5a6675; --ink-3:#8b96a5;
+    --line:#e3e8ef; --bg:#f6f8fb; --card:#ffffff; --warn-bg:#fff6e8; --warn-line:#f0c98a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+    font-size:16px; line-height:1.75; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--blue); text-decoration:none}
+  a:hover{text-decoration:underline}
+  code,kbd{font-family:Consolas,"Courier New",monospace; font-size:.92em}
+  code{background:#eef1f6; padding:1px 6px; border-radius:4px; color:#2b3a4a}
+  header.top{
+    background:var(--blue); color:#fff; padding:14px 0;
+    position:sticky; top:0; z-index:20;
+  }
+  header.top .wrap{display:flex; align-items:center; gap:18px; flex-wrap:wrap}
+  .logo{font-size:22px; font-weight:700; letter-spacing:.5px}
+  .logo span{opacity:.8; font-weight:400; font-size:14px; margin-left:8px}
+  nav.links{margin-left:auto; display:flex; gap:16px; flex-wrap:wrap; font-size:14px}
+  nav.links a{color:#fff; opacity:.9}
+  nav.links a:hover{opacity:1; text-decoration:none; border-bottom:2px solid rgba(255,255,255,.6)}
+  .wrap{max-width:960px; margin:0 auto; padding:0 22px}
+  section{padding:44px 0; border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+  h1{font-size:32px; line-height:1.35; margin:0 0 12px}
+  h2{font-size:22px; margin:0 0 18px}
+  h3{font-size:17px; margin:26px 0 10px}
+  p{margin:0 0 12px}
+  .lead{font-size:17px; color:var(--ink-2); max-width:44em}
+  .hero{padding:56px 0 44px}
+  .tag{display:inline-block; background:var(--blue-soft); color:var(--blue-dark); border-radius:999px; padding:3px 13px; font-size:13px; margin:0 8px 8px 0}
+  .btns{display:flex; gap:12px; flex-wrap:wrap; margin:26px 0 10px}
+  .btn{display:inline-block; background:var(--blue); color:#fff; padding:12px 24px; border-radius:8px; font-size:16px}
+  .btn:hover{background:var(--blue-dark); text-decoration:none}
+  .btn.ghost{background:#fff; color:var(--blue-dark); border:1px solid var(--blue)}
+  .btn.ghost:hover{background:var(--blue-soft)}
+  .meta{font-size:13px; color:var(--ink-3)}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px 22px; margin:14px 0}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; margin-top:18px}
+  ul,ol{margin:0 0 14px; padding-left:22px}
+  li{margin:5px 0}
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:15px}
+  th,td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top}
+  th{background:#f0f4f9; font-weight:600}
+  .notice{background:var(--warn-bg); border:1px solid var(--warn-line); border-radius:10px; padding:16px 20px; margin:18px 0}
+  .notice b{color:#8a5a00}
+  .hash{word-break:break-all; font-family:Consolas,monospace; font-size:12px; color:var(--ink-3)}
+  .hashbox{background:#f0f4f9; border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin:8px 0}
+  .hashbox .hash{display:block; color:var(--ink-2)}
+  footer{padding:30px 0 46px; color:var(--ink-3); font-size:14px}
+  .kbd-list{margin:0; padding:0; list-style:none}
+  .kbd-list li{padding-left:0}
+  @media (max-width:640px){ h1{font-size:26px} .hero{padding:38px 0 28px} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="logo">PCL-QW<span>第三方社区修改版</span></div>
+    <nav class="links">
+      <a href="#download">下载</a>
+      <a href="#features">功能</a>
+      <a href="#link">联机</a>
+      <a href="#faq">常见问题</a>
+      <a href="#selfhost">自建与发布</a>
+      <a href="#build">自行构建</a>
+      <a href="#credit">鸣谢与许可</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section class="hero">
+  <h1>PCL-QW</h1>
+  <p class="lead">基于 <b>Plain Craft Launcher 2（PCL2）2.13.1.1</b> 源代码制作的第三方社区修改版 Minecraft Java 版启动器。原版 PCL 由 <b>龙腾猫跃</b> 开发，本项目不改变其主体设计，只在实例管理、世界编辑、本地服务器与联机这几处做了扩展。</p>
+  <p>
+    <span class="tag">实例库</span><span class="tag">世界设置</span><span class="tag">一键版本升级</span><span class="tag">本地服务器</span><span class="tag">陶瓦联机</span><span class="tag">截图查看</span><span class="tag">无匿名上报</span>
+  </p>
+  <div class="btns">
+    <a class="btn" href="PCL-QW.exe" download>下载 Windows 版</a>
+    <a class="btn ghost" href="PCL-QW-源码.zip" download>下载完整源码</a>
+  </div>
+  <p class="meta">当前版本 2.13.1.1（PCL-QW mod-1.8）　·　大小 5.57 MB　·　无需安装，放到任意文件夹双击即可</p>
+
+  <div class="notice">
+    <b>关于 macOS 与 Linux：</b>本项目<b>只提供 Windows 版</b>。PCL2 是 VB.NET + WPF + .NET Framework 4.8 程序，WPF 只存在于 Windows 版 .NET 中，因此无法在 macOS / Linux 上编译或运行，也没有 Wine 之外的官方方案。如果你需要跨平台启动器，请使用上游 <a href="https://github.com/HMCL-dev/HMCL">HMCL</a> 或 <a href="https://github.com/zdunne/PrismLauncher">Prism Launcher</a>（均为独立项目，与本修改版无关）。
+  </div>
+</section>
+
+<section id="download">
+  <h2>下载</h2>
+  <table>
+    <tr><th style="width:26%">文件</th><th>说明</th></tr>
+    <tr><td><a href="PCL-QW.exe" download>PCL-QW.exe</a></td><td>Windows 图形界面启动器本体，5.57 MB，单文件免安装。需要 .NET Framework 4.8（Windows 10 / 11 已自带；Windows 7 / 8.1 需自行安装）。</td></tr>
+    <tr><td><a href="PCL-QW-源码.zip" download>PCL-QW-源码.zip</a></td><td>完整可编译源码（含 MeloongCore 子模块内容与全部改动），2.47 MB，标准 zip，下载后直接解压。按《PCL 存储库合理使用指南》要求公开。</td></tr>
+    <tr><td><a href="README-MOD.md">README-MOD.md</a></td><td>改动清单、构建方法、合规说明。</td></tr>
+  </table>
+
+  <h3>SHA-256 校验值</h3>
+  <p class="meta">建议下载后核对一遍哈希，确认传输过程没有损坏或被改动。</p>
+  <div class="hashbox">
+    <b>PCL-QW.exe</b>
+    <span class="hash">948cd26c129bb02c5bff407ab55846cf7b11769c8bc46f130b334f76c1a7ecf3</span>
+  </div>
+  <div class="hashbox">
+    <b>源码包</b><span class="meta">（<code>PCL-QW-源码.zip</code>，直接解压即可）</span>
+    <span class="hash">18a4d5697977edfcc934455bd4c2c5fbc136aff0790dc4c3b272bfeda4ad254f</span>
+  </div>
+  <p class="meta">PowerShell 校验：<code>(Get-FileHash .\PCL-QW.exe -Algorithm SHA256).Hash.ToLower()</code></p>
+  <p class="meta">说明：源码包为便于分发，未包含上游仓库中两个不参与构建的附带文件——<code>patches\</code>（6.2 MB，上游补丁存档）与根目录的 <code>最新正式版.zip</code>（2.5 MB，内嵌的官方正式版 exe 备份）。其余 380 个文件与仓库 <code>mod-1.8</code> 一致，运行 <code>build-mod.cmd</code> 可直接编译出本页提供的同款 exe。</p>
+
+  <h3>首次运行</h3>
+  <ol>
+    <li>把 <code>PCL-QW.exe</code> 放进一个<b>单独的空文件夹</b>（不要直接丢在 <code>.minecraft</code> 里），双击运行。</li>
+    <li>首次会显示一次“PCL-QW 使用说明”，读完关闭即可，之后不再弹。</li>
+    <li>如果启动器没自动找到游戏目录，在弹出的选择框里指到已有的 <code>.minecraft</code>，或让它新建一个。</li>
+    <li>「设置 → 下载 → 社区资源 → 来源」建议保持“尽量使用官方源”；如果你的网络到 MCIM 镜像不通，选“尽量使用镜像源”会让模组列表每次多等 20 秒。</li>
+  </ol>
+</section>
+
+<section id="features">
+  <h2>相对原版 PCL2 改了什么</h2>
+  <p>所有改动都是<b>增量</b>的：原有功能、界面主色（蓝色）、正版购买劝导与赞助劝导均未改动。</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3 style="margin-top:0">实例库</h3>
+      <p>顶部新增「实例库」标签，集中查看与启动全部实例。单击实例进入管理，可查看并操作该实例的世界、资源包、光影、文件、服务器列表、日志。</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">世界设置</h3>
+      <p>不进入游戏即可修改游戏模式、难度、允许作弊、世界显示名称与种子。直接读写 <code>level.dat</code>（gzip NBT），保存前自动备份 <code>level.dat.bak</code>，可一键还原。</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">一键版本升级</h3>
+      <p>选择目标版本后自动安装新版本（含 Fabric / Forge / NeoForge 加载器识别），迁移世界、资源包、光影、配置与版本独立设置，并按新版本重新下载模组，未处理项写入迁移报告。</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">本地服务器</h3>
+      <p>顶部新增「服务器」标签，实例页新增“创建服务器”。服务端建在该实例文件夹内，支持原版 / Fabric / Forge / NeoForge，启动器内直接启停、实时控制台、发送指令。</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">联机（陶瓦联机）</h3>
+      <p>开源版原本隐藏了联机标签（官方实现依赖只有正式版能取到的在线配置）。本修改版把联机后端换成第三方开源工具陶瓦联机，联机标签与联机设置重新可用。</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">截图查看</h3>
+      <p>实例页新增“截图”子页：缩略图墙 + 点击预览，支持放大查看、复制图片、复制并定位文件、重命名、删除（移入系统回收站）。</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">首页固定与最近游玩</h3>
+      <p>首页新增「固定到首页」与「最近游玩」卡片，实例 / 世界 / 服务器都可一键启动。记录保存在启动器目录的 <code>PCL\Recent.json</code>，不写注册表。</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">下载任务页</h3>
+      <p>「下载」标签页新增“下载任务”：总进度、正在下载哪个文件、已下载 / 总大小、实时速度、失败原因，可按任务取消。右下角浮标改为跳转到这里。</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">其他</h3>
+      <p>设置导出 / 导入（JSON，不含账号与登录信息）；移除开源版不支持的“百宝箱”及其依赖的无效“内存优化”开关；下载线程默认值 63 → 85；列表改为后台加载不卡界面。</p>
+    </div>
+  </div>
+</section>
+
+<section id="link">
+  <h2>联机说明</h2>
+  <p>联机功能由第三方开源项目 <b>陶瓦联机（Terracotta）</b> 提供，它基于 <a href="https://github.com/EasyTier/EasyTier">EasyTier</a> 组网，由 Burning_TNT 与 Terracotta 贡献者开发，采用 <a href="https://github.com/burningtnt/Terracotta">AGPL-3.0 或更高版本</a>许可（附带打包与进程间通信的例外条款）。</p>
+  <p>PCL-QW 只以<b>未修改的可执行程序 + 本机接口</b>的方式调用它：启动 <code>陶瓦联机.exe --hmcl &lt;端口文件&gt;</code>，再读写 <code>http://127.0.0.1:&lt;端口&gt;</code> 上的房间状态。不链接、不修改其任何代码，也不会把任何信息上传到本修改版的作者。</p>
+
+  <h3>用法</h3>
+  <ol>
+    <li>进入「联机」标签，点“创建房间”，填一个联机昵称。</li>
+    <li>首次使用会自动下载陶瓦程序（约 8 MB），进度可以在「下载 → 下载任务」里看。</li>
+    <li>陶瓦会先<b>扫描本地的 Minecraft 服务器</b>：请在游戏内对局域网开放世界，或先启动一个本地服务器。</li>
+    <li>扫描到之后状态变为“已创建房间”，把房间码发给朋友，他们在“加入房间”里输入即可。</li>
+    <li>访客连上后地址形如 <code>127.0.0.1:端口</code>，在多人游戏里添加服务器，或用实例页的“联机”子页一键进游戏。</li>
+  </ol>
+
+  <div class="notice">
+    <b>两个已知前提：</b>①陶瓦同一时间只能运行一个实例，如果你自己开着陶瓦窗口，启动器会先结束那个窗口再接管；②房主必须有一个正在监听的本地服务器，否则会一直停在“正在扫描本地的 Minecraft 服务器”。
+  </div>
+
+  <p class="meta">下载不通时：可自行从 <a href="https://github.com/burningtnt/Terracotta/releases">陶瓦联机 Releases</a> 下载 <code>terracotta-&lt;版本&gt;-windows_x86_64-pkg.tar.gz</code>，放入 <code>%APPDATA%\PCL\Terracotta\</code>；或直接把解压出来的 exe 改名为 <code>陶瓦联机.exe</code> 放在同一目录。</p>
+</section>
+
+<section id="faq">
+  <h2>常见问题</h2>
+
+  <h3>模组 / 资源包列表加载很慢，甚至“版本加载失败”</h3>
+  <p>多为两个原因之一：</p>
+  <ul>
+    <li><b>镜像源不通。</b>「设置 → 下载 → 社区资源 → 来源」如果选了“尽量使用镜像源”，而你的网络到 <code>mod.mcimirror.top</code> 不通，每次请求要先等两次 10 秒超时才回落官方接口。改成“尽量使用官方源”即可。</li>
+    <li><b>CurseForge 没有 API Key。</b> 官方发布由 CI 注入 Key，社区版没有。未配置时社区搜索会自动只走 Modrinth，不再表现为“加载失败”；需要 CurseForge 就设置环境变量 <code>PCL_CURSEFORGE_API_KEY</code>。</li>
+  </ul>
+
+  <h3>创建服务器时提示“没有找到可运行的 jar 文件”</h3>
+  <p>mod-1.7 已修复。旧版本里下载步骤没有把文件列表交给下载器，导致什么都没下载。请确认下载任务页里能看到 <code>&lt;版本&gt;-server.jar</code> 正在下载。</p>
+
+  <h3>服务器点了启动，窗口一闪就退出</h3>
+  <p>最常见是 Java 版本不够。新版 Minecraft（如 26.x）的服务端需要 <b>Java 25</b>，而客户端实例可能是 Java 21。启动器会按服务端自身版本选择 Java；如果本机没有对应版本，会在控制台里看到 <code>UnsupportedClassVersionError</code>，去「设置 → 启动 → Java」安装或导入即可。服务器的全部输出也会写进启动器日志（<code>PCL\Log1.txt</code>）。</p>
+
+  <h3>“最近游玩”是空的</h3>
+  <p>需要<b>成功启动一次游戏</b>之后才会出现内容；「固定到首页」不依赖启动，随时可用。</p>
+
+  <h3>世界设置改了没生效 / 显示不对</h3>
+  <p>mod-1.4 起改用 level.dat 的真实字段（<code>GameType</code> / <code>Difficulty</code> / <code>allowCommands</code>）。如果你手上是很老的构建，请换新版本。另外修改种子只影响<b>尚未生成</b>的新区域，已探索区域不会变——这是 Minecraft 原生机制。</p>
+
+  <h3>会上传我的信息吗？</h3>
+  <p>不会。本修改版沿用上游开源版的行为：不启用匿名数据上报，没有自动更新，不拉取公告。设置导出为 JSON，且<b>不包含账号与登录信息</b>。</p>
+</section>
+
+<section id="selfhost">
+  <h2>自建与发布（把这一页放到公网）</h2>
+  <p>本目录本身就是一套完整的静态站点：<code>index.html</code> + <code>PCL-QW.exe</code> + <code>PCL-QW-源码.zip</code> + <code>README-MOD.md</code>。不依赖任何框架、构建步骤或第三方 CDN，双击 <code>index.html</code> 就能打开。要让它变成“永久公开网页”，把同一个文件夹原样挂到任意静态托管上即可。</p>
+
+  <h3>方式一：本机起服务（最省事，适合先给朋友看）</h3>
+  <div class="card">
+    <p style="margin:0">目录里附带一个零依赖的 Node.js 单文件服务器 <code>serve.js</code>。在本目录打开命令行，执行：</p>
+<pre style="overflow:auto;background:#f0f4f9;padding:12px 14px;border-radius:6px;font-size:13px;line-height:1.6;margin:10px 0 0"><code>node serve.js
+# 默认 http://127.0.0.1:8080 ，可用 node serve.js 9000 换端口</code></pre>
+    <p class="meta" style="margin:10px 0 0">它会自动列出目录文件并带上正确的下载文件名。想让局域网内的人访问，用 <code>node serve.js 8080 0.0.0.0</code>；换设备的话地址要用你这台电脑的局域网 IP。</p>
+  </div>
+
+  <h3>方式二：静态托管（真正常态公开）</h3>
+  <p>任选一个，做法都是「把这个文件夹整个传上去」：</p>
+  <ul>
+    <li><b>GitHub Pages</b>：把本目录内容推到仓库，Settings → Pages → Source 选 <code>main</code> 分支根目录，保存后一分钟内得到 <code>https://&lt;用户名&gt;.github.io/&lt;仓库名&gt;/</code>。</li>
+    <li><b>Cloudflare Pages / Netlify / Vercel</b>：直接拖拽本目录上传即可，无构建命令、无输出目录要求。</li>
+    <li><b>国内对象存储 + CDN</b>（阿里云 OSS、腾讯云 COS、七牛等）：把四个文件作为静态资源上传并设为公共读，用自定义域名访问。这一步可以让国内用户免翻墙直接下载。</li>
+  </ul>
+  <div class="notice">
+    <b>关于「永久」：</b>上面的服务都是免费档，但都由第三方运营、需要你自己注册并保持账号有效，我不能替你在任何平台上创建账号或保证其长期在线。真正的“永久公开”= 你把这份静态目录放到一个你自己可控、且愿意持续续费的托管上；目录内容本身不包含任何会过期的东西。
+  </div>
+
+  <h3>发布时建议顺手做的两件事</h3>
+  <ol>
+    <li>页脚目前写着「见发布方 GitHub 仓库 <b>frfhgrhff/cnm</b>」但<b>没有超链接</b>，因为该仓库当前验证为不可访问。等仓库公开可用后，把页脚那行改成 <code>&lt;a href="https://github.com/frfhgrhff/cnm"&gt;frfhgrhff/cnm&lt;/a&gt;</code>。</li>
+    <li>把本页 <code>&lt;head&gt;</code> 里 <code>description</code> 的措辞按你的最终版本再核对一遍。上游要求第三方修改版的反馈由发布者承接，不要让用户去找 PCL 官方。</li>
+  </ol>
+  <div class="notice">
+    <b>关于 hosts 劫持：</b>如果你的机器上装了 Steam++ 之类的 GitHub 加速工具，访问 GitHub 前请确认它是否正在运行。本次验证时 <code>C:\Windows\System32\drivers\etc\hosts</code> 把 <code>github.com</code> 等全部域名指向了 <code>127.0.0.1</code>，由本机进程冒充 GitHub 返回页面——这种情况下<b>无法判断仓库真实状态</b>。上面「不可访问」的结论是在这个前提下得出的。
+  </div>
+</section>
+
+<section id="build">
+  <h2>自行构建</h2>
+  <p>依赖：Visual Studio 2022 BuildTools（.NET 桌面生成工具）+ .NET SDK 10.x。无需 Visual Studio IDE。</p>
+  <div class="card">
+    <p style="margin:0"><b>方式一：</b>解压源码后直接运行仓库根目录的 <code>build-mod.cmd</code>（按需修改脚本内的路径）。</p>
+  </div>
+  <div class="card">
+    <p style="margin:0"><b>方式二：</b>手动执行</p>
+<pre style="overflow:auto;background:#f0f4f9;padding:12px 14px;border-radius:6px;font-size:13px;line-height:1.6;margin:10px 0 0"><code>set MSBuildSDKsPath=C:\Program Files\dotnet\sdk\10.0.401\Sdks
+set DOTNET_ROOT=C:\Program Files\dotnet
+"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\MSBuild.exe" ^
+  "Plain Craft Launcher 2\Plain Craft Launcher 2.vbproj" -restore -p:Configuration=Release</code></pre>
+    <p class="meta" style="margin:10px 0 0">产物：<code>Plain Craft Launcher 2\bin\PCL-QW.exe</code></p>
+  </div>
+  <p class="meta">源码包不含 <code>.git</code>；仓库共 15 个提交，标签 <code>mod-1.0 … mod-1.8</code>，改动清单见源码包内的 <code>README-MOD.md</code>。</p>
+</section>
+
+<section id="credit">
+  <h2>鸣谢与许可</h2>
+  <ul class="kbd-list">
+    <li><b>PCL（Plain Craft Launcher）由 龙腾猫跃 开发。</b>本项目是基于其公开源代码制作的第三方修改版，<b>非官方版本</b>；使用中遇到的问题请向本页面发布者反馈，不要打扰 PCL 官方。原版 PCL 如果帮到了你，欢迎支持原作者：<a href="https://meloong.com/afd/a/LTCat">meloong.com/afd/a/LTCat</a></li>
+    <li>上游源代码：<a href="https://github.com/Meloong-Git/PCL">Meloong-Git/PCL</a>，本修改版基于 tag <code>2.13.1.1</code>（子模块 MeloongCore @ <code>811438a</code>）。</li>
+    <li>联机能力：<a href="https://github.com/burningtnt/Terracotta">陶瓦联机 Terracotta</a>，作者 Burning_TNT 与贡献者，AGPL-3.0 or later（含例外条款）；底层组网 <a href="https://github.com/EasyTier/EasyTier">EasyTier</a>。</li>
+    <li>许可：沿用上游《PCL 分发有限许可》与《PCL 存储库合理使用指南》（见源码包根目录 <code>LICENCE</code>）。本修改版保持开源、名称以 PCL 开头并标明第三方修改、关于页首位保留原作者署名与赞助链接、界面主色保持蓝色、保留正版购买劝导与赞助劝导。</li>
+    <li>Minecraft 是 Mojang / Microsoft 的商标。运行服务器需同意 <a href="https://account.mojang.com/documents/minecraft_eula">Minecraft 最终用户协议</a>；请支持正版。</li>
+  </ul>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>PCL-QW · 基于 PCL 2.13.1.1 的第三方社区修改版 · 仅支持 Windows　·　<a href="#download">回到下载</a></p>
+    <p>页面本身不加载任何第三方脚本、统计代码或外链字体；所有内容随本目录一起分发，可离线浏览。</p>
+    <p class="meta">问题反馈与源码：见发布方 GitHub 仓库 <b>frfhgrhff/cnm</b>（若暂时无法访问，请通过你获取本启动器的渠道联系发布者）。</p>
+  </div>
+</footer>
+
+</body>
+</html>
